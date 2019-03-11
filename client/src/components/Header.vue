@@ -8,8 +8,9 @@
     </v-toolbar-items>
     <v-spacer></v-spacer>
     <v-toolbar-items>
-      <v-btn flat dark @click="gotologin">Log In</v-btn>
-      <v-btn flat dark @click="gotoregister">Sign Up</v-btn>
+      <v-btn v-if="!$store.state.isUserLoggedIn" flat dark @click="gotologin">Log In</v-btn>
+      <v-btn v-else flat dark @click="logout">Log out</v-btn>
+      <v-btn v-if="!$store.state.isUserLoggedIn" flat dark @click="gotoregister">Sign Up</v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>
@@ -26,6 +27,11 @@ export default {
     },
     gotologin () {
       this.$router.push('login')
+    },
+    logout () {
+      this.$router.push('/login')
+      this.$store.dispatch('setToken', null)
+      this.$store.dispatch('setUser', null)
     }
   }
 }
