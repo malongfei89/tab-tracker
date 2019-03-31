@@ -3,8 +3,8 @@
     <v-app>
       <v-content>
         <v-container fluid>
-          <page-header>
-          </page-header>
+          <Header>
+          </Header>
           <!-- <img src="./assets/logo.png"> -->
           <router-view />
         </v-container>
@@ -14,11 +14,11 @@
 </template>
 
 <script>
-import PageHeader from '@/components/Header'
+import Header from '@/components/Header'
 export default {
   name: 'App',
   components: {
-    PageHeader
+    Header
   }
 }
 </script>
@@ -31,5 +31,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.home {
+  cursor: pointer
+}
+.home:hover {
+    color: black
 }
 </style>

@@ -36,19 +36,20 @@ module.exports = {
           error: 'Invalid login information!'
         })
       }
-      user.comparePassword(password, isPasswordValid => {
-        if (!isPasswordValid) {
-          return res.status(403).send({
-            error: 'Invalid login information!'
-          })
-        } else {
-          const userJson = user.toJSON()
-          res.send({
-            user: userJson,
-            token: jwtSignUser(userJson)
-          })
-        }
-      })
+      user.comparePassword(password)
+        .then((isPasswordValid) => {
+          if (!isPasswordValid) {
+            res.status(403).send({
+              error: 'Invalid login information!'
+            })
+          } else {
+            const userJson = user.toJSON()
+            res.send({
+              user: userJson,
+              token: jwtSignUser(userJson)
+            })
+          }
+        })
     } catch (err) {
       res.status(500).send({
         error: 'An error has occured trying to log in'

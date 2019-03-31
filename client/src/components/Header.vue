@@ -1,16 +1,16 @@
 <template>
   <v-toolbar fixed class="cyan" dark>
     <v-toolbar-title class="mr-4">
-      <span class= "home" @click="gotohome">TabTracker</span>
+      <span class= "home" @click="goto('home')">TabTracker</span>
     </v-toolbar-title>
     <v-toolbar-items>
-      <v-btn flat dark>Browse</v-btn>
+      <v-btn class="home" flat dark @click="goto('songs')">Browse</v-btn>
     </v-toolbar-items>
     <v-spacer></v-spacer>
     <v-toolbar-items>
-      <v-btn v-if="!$store.state.isUserLoggedIn" flat dark @click="gotologin">Log In</v-btn>
-      <v-btn v-else flat dark @click="logout">Log out</v-btn>
-      <v-btn v-if="!$store.state.isUserLoggedIn" flat dark @click="gotoregister">Sign Up</v-btn>
+      <v-btn class="home" v-if="!$store.state.isUserLoggedIn" flat dark @click="goto('login')">Log In</v-btn>
+      <v-btn class="home" v-else flat dark @click="logout">Log out</v-btn>
+      <v-btn class="home" v-if="!$store.state.isUserLoggedIn" flat dark @click="goto('register')">Sign Up</v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>
@@ -19,14 +19,8 @@
 
 export default {
   methods: {
-    gotoregister () {
-      this.$router.push({name: 'register'})
-    },
-    gotohome () {
-      this.$router.push({name: 'home'})
-    },
-    gotologin () {
-      this.$router.push('login')
+    goto (desti) {
+      this.$router.push({name: desti})
     },
     logout () {
       this.$router.push('/login')
@@ -38,10 +32,5 @@ export default {
 </script>
 
 <style scoped>
-.home {
-  cursor: pointer
-}
-.home:hover {
-    color: black
-}
+
 </style>
